@@ -8,65 +8,173 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: linear-gradient(to right, #ff758c, #ff7eb3);
+    background: radial-gradient(circle at top, #ff9a9e, #ff4d6d);
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
 }
 
+/* Romantic Card */
 .card {
-    background: #f3f3f3;
-    padding: 40px;
+    background: rgba(255,255,255,0.95);
+    padding: 45px;
     border-radius: 25px;
     text-align: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    width: 400px;
+    box-shadow: 0 0 40px rgba(255, 77, 109, 0.8);
+    width: 420px;
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    from { box-shadow: 0 0 25px rgba(255, 77, 109, 0.6); }
+    to { box-shadow: 0 0 50px rgba(255, 0, 90, 0.9); }
 }
 
 h2 {
-    margin-top: 10px;
+    color: #ff2e63;
 }
 
-p {
-    line-height: 1.6;
+/* Floating Hearts */
+.heart {
+    position: fixed;
+    bottom: -10px;
+    font-size: 20px;
+    animation: floatUp 6s linear infinite;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-110vh); opacity: 0; }
+}
+
+/* Rose Petals */
+.petal {
+    position: fixed;
+    top: -10px;
+    font-size: 18px;
+    animation: fall 7s linear infinite;
+}
+
+@keyframes fall {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(110vh) rotate(360deg); }
+}
+
+/* Sparkles */
+.sparkle {
+    position: fixed;
+    font-size: 18px;
+    animation: sparkle 1.5s infinite alternate;
+}
+
+@keyframes sparkle {
+    from { opacity: 0.3; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1.3); }
+}
+
+/* Confetti */
+.confetti {
+    position: fixed;
+    width: 6px;
+    height: 6px;
+    background: red;
+    animation: confettiFall 4s linear infinite;
+}
+
+@keyframes confettiFall {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(110vh); }
+}
+
+/* Heartbeat */
+.big-heart {
+    font-size: 55px;
+    animation: beat 1s infinite;
+}
+
+@keyframes beat {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
 }
 </style>
 </head>
 
 <body>
 
+<!-- Floating Hearts -->
+<script>
+for (let i = 0; i < 25; i++) {
+    let heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (4 + Math.random() * 3) + "s";
+    document.body.appendChild(heart);
+}
+</script>
+
+<!-- Rose Petals -->
+<script>
+for (let i = 0; i < 20; i++) {
+    let petal = document.createElement("div");
+    petal.className = "petal";
+    petal.innerHTML = "🌹";
+    petal.style.left = Math.random() * 100 + "vw";
+    petal.style.animationDuration = (5 + Math.random() * 4) + "s";
+    document.body.appendChild(petal);
+}
+</script>
+
+<!-- Confetti -->
+<script>
+for (let i = 0; i < 80; i++) {
+    let conf = document.createElement("div");
+    conf.className = "confetti";
+    conf.style.left = Math.random() * 100 + "vw";
+    conf.style.background = ["#ff4d6d","#ffd166","#06d6a0","#118ab2","#ef476f"][Math.floor(Math.random()*5)];
+    conf.style.animationDuration = (2 + Math.random() * 3) + "s";
+    document.body.appendChild(conf);
+}
+</script>
+
 <div class="card">
-    <div style="font-size:50px;">🤗 🌸 💕</div>
+    <div class="big-heart">💖</div>
+    <div style="font-size:40px;">🤗 🌸 💕</div>
 
     <h2>Yay! She said YES 💞</h2>
 
-    <p> Congratulations, My Dearest Kiran ❤️ <br></p>
-        
-    <p> Today is not just a day… it’s a memory I will cherish for a lifetime ✨<br>
-        Our first Valentine as husband and wife makes my heart feel so full and grateful 💑<br>
+    <p><b>Congratulations, My Dearest Kiran ❤️</b></p>
+
+    <p>
+        Today is not just a day… it’s a memory I will cherish forever ✨<br>
+        Our first Valentine as husband and wife fills my heart with endless love 💑
     </p>
 
-    <p> You are my today, my tomorrow, and my forever.<br>
-        My home, my happiness, my biggest blessing. <br></p>
-
-    <p> Thank you for being my beautiful wife,<br>
-        my best friend, my love, my everything 💖 <br></p>
-
-    <p> I promise to love you more with every sunrise,<br>
-        to stand by you in every moment,<br>
-        and to hold your hand forever 🤝❤️<br>
+    <p>
         You are my today, my tomorrow, and my forever.<br>
+        My home, my happiness, my biggest blessing 💖
     </p>
 
-    <p><b>I love you endlessly, now and always 💘🌹</b><br></p>
+    <p>
+        Thank you for being my beautiful wife,<br>
+        my best friend, my love, my everything 💞
+    </p>
 
-<p>     Forever Yours, <br>
-        Your Loving Husband 💞 <br></p>
+    <p>
+        I promise to love you more with every sunrise,<br>
+        to stand by you always,<br>
+        and to hold your hand forever 🤝❤️
+    </p>
+
+    <p><b>I love you endlessly, now and always 💘🌹</b></p>
+
+    <p>
+        Forever Yours,<br>
+        Your Loving Husband 💞
+    </p>
 </div>
 
 </body>
-
 </html>
-
-
