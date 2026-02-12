@@ -92,7 +92,7 @@ body {
 /* Secret Message */
 #secret {
     position: fixed;
-    bottom: 20px;
+    bottom: 10px;
     background: #fff;
     padding: 15px 25px;
     border-radius: 20px;
@@ -106,9 +106,16 @@ body {
 <body>
 
 <!-- 🎵 Romantic Music -->
-<audio autoplay loop>
-  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_6c9a7c1f63.mp3?filename=romantic-love-11776.mp3" type="audio/mp3">
+<audio id="bgMusic" loop>
+  <source src="romantic.mp3" type="audio/mp3">
 </audio>
+
+<script>
+document.body.addEventListener("click", function () {
+    const music = document.getElementById("bgMusic");
+    music.play().catch(() => {});
+});
+</script>
 
 <!-- Floating Hearts -->
 <script>
@@ -193,3 +200,4 @@ document.body.addEventListener("click", () => {
 
 </body>
 </html>
+
