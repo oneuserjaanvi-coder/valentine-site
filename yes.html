@@ -2,12 +2,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>She Said Yes!</title>
+<title>My Love ❤️</title>
 
 <style>
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', sans-serif;
     background: radial-gradient(circle at top, #ff9a9e, #ff4d6d);
     height: 100vh;
     display: flex;
@@ -18,22 +18,28 @@ body {
 
 /* Romantic Card */
 .card {
-    background: rgba(255,255,255,0.95);
+    background: rgba(255,255,255,0.96);
     padding: 45px;
     border-radius: 25px;
     text-align: center;
-    box-shadow: 0 0 40px rgba(255, 77, 109, 0.8);
+    box-shadow: 0 0 40px rgba(255, 0, 90, 0.8);
     width: 420px;
     animation: glow 2s infinite alternate;
 }
 
 @keyframes glow {
-    from { box-shadow: 0 0 25px rgba(255, 77, 109, 0.6); }
-    to { box-shadow: 0 0 50px rgba(255, 0, 90, 0.9); }
+    from { box-shadow: 0 0 25px rgba(255, 0, 90, 0.5); }
+    to { box-shadow: 0 0 55px rgba(255, 0, 90, 0.9); }
 }
 
-h2 {
-    color: #ff2e63;
+.big-heart {
+    font-size: 60px;
+    animation: beat 1s infinite;
+}
+
+@keyframes beat {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
 }
 
 /* Floating Hearts */
@@ -62,24 +68,11 @@ h2 {
     100% { transform: translateY(110vh) rotate(360deg); }
 }
 
-/* Sparkles */
-.sparkle {
-    position: fixed;
-    font-size: 18px;
-    animation: sparkle 1.5s infinite alternate;
-}
-
-@keyframes sparkle {
-    from { opacity: 0.3; transform: scale(0.8); }
-    to { opacity: 1; transform: scale(1.3); }
-}
-
 /* Confetti */
 .confetti {
     position: fixed;
     width: 6px;
     height: 6px;
-    background: red;
     animation: confettiFall 4s linear infinite;
 }
 
@@ -88,24 +81,38 @@ h2 {
     100% { transform: translateY(110vh); }
 }
 
-/* Heartbeat */
-.big-heart {
-    font-size: 55px;
-    animation: beat 1s infinite;
+/* Typing text */
+#typing {
+    font-size: 18px;
+    line-height: 1.6;
+    min-height: 120px;
+    color: #333;
 }
 
-@keyframes beat {
-    0%,100% { transform: scale(1); }
-    50% { transform: scale(1.2); }
+/* Secret Message */
+#secret {
+    position: fixed;
+    bottom: 20px;
+    background: #fff;
+    padding: 15px 25px;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(255,0,90,0.5);
+    display: none;
+    font-size: 16px;
 }
 </style>
 </head>
 
 <body>
 
+<!-- 🎵 Romantic Music -->
+<audio autoplay loop>
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_6c9a7c1f63.mp3?filename=romantic-love-11776.mp3" type="audio/mp3">
+</audio>
+
 <!-- Floating Hearts -->
 <script>
-for (let i = 0; i < 25; i++) {
+for (let i = 0; i < 30; i++) {
     let heart = document.createElement("div");
     heart.className = "heart";
     heart.innerHTML = "❤️";
@@ -129,7 +136,7 @@ for (let i = 0; i < 20; i++) {
 
 <!-- Confetti -->
 <script>
-for (let i = 0; i < 80; i++) {
+for (let i = 0; i < 90; i++) {
     let conf = document.createElement("div");
     conf.className = "confetti";
     conf.style.left = Math.random() * 100 + "vw";
@@ -141,40 +148,48 @@ for (let i = 0; i < 80; i++) {
 
 <div class="card">
     <div class="big-heart">💖</div>
-    <div style="font-size:40px;">🤗 🌸 💕</div>
-
     <h2>Yay! She said YES 💞</h2>
 
-    <p><b>Congratulations, My Dearest Kiran ❤️</b></p>
+    <div id="typing"></div>
 
-    <p>
-        Today is not just a day… it’s a memory I will cherish forever ✨<br>
-        Our first Valentine as husband and wife fills my heart with endless love 💑
-    </p>
-
-    <p>
-        You are my today, my tomorrow, and my forever.<br>
-        My home, my happiness, my biggest blessing 💖
-    </p>
-
-    <p>
-        Thank you for being my beautiful wife,<br>
-        my best friend, my love, my everything 💞
-    </p>
-
-    <p>
-        I promise to love you more with every sunrise,<br>
-        to stand by you always,<br>
-        and to hold your hand forever 🤝❤️
-    </p>
-
-    <p><b>I love you endlessly, now and always 💘🌹</b></p>
-
-    <p>
-        Forever Yours,<br>
-        Your Loving Husband 💞
-    </p>
+    <p><b>I love you endlessly, now and always 💘</b></p>
+    <p>Forever Yours,<br>Your Loving Husband 💞</p>
 </div>
+
+<div id="secret">💌 Secret Message: You are the best thing that ever happened to me ❤️</div>
+
+<script>
+/* Typing Animation */
+const text = `Congratulations, My Dearest Kiran ❤️
+
+Today is not just a day… it’s a memory I will cherish forever ✨
+Our first Valentine as husband and wife fills my heart with endless love 💑
+
+You are my today, my tomorrow, and my forever.
+My home, my happiness, my biggest blessing 💖
+
+Thank you for being my beautiful wife,
+my best friend, my love, my everything 💞
+
+I promise to love you more with every sunrise,
+to stand by you always,
+and to hold your hand forever 🤝❤️`;
+
+let i = 0;
+function typeWriter() {
+    if (i < text.length) {
+        document.getElementById("typing").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, 35);
+    }
+}
+typeWriter();
+
+/* Secret Message on Tap */
+document.body.addEventListener("click", () => {
+    document.getElementById("secret").style.display = "block";
+});
+</script>
 
 </body>
 </html>
