@@ -2,202 +2,230 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>My Love ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>She Said Yes!</title>
 
 <style>
 body {
     margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: radial-gradient(circle at top, #ff9a9e, #ff4d6d);
-    height: 100vh;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #ff758c, #ff7eb3);
     display: flex;
     justify-content: center;
     align-items: center;
+    min-height: 100vh;
+    padding: 15px;
     overflow: hidden;
+    position: relative;
 }
 
-/* Romantic Card */
+/* Card */
 .card {
-    background: rgba(255,255,255,0.96);
-    padding: 45px;
-    border-radius: 25px;
+    background: #ffffff;
+    padding: 22px;
+    border-radius: 22px;
     text-align: center;
-    box-shadow: 0 0 40px rgba(255, 0, 90, 0.8);
-    width: 420px;
-    animation: glow 2s infinite alternate;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    width: 100%;
+    max-width: 380px;
+    position: relative;
+    z-index: 10;
 }
 
-@keyframes glow {
-    from { box-shadow: 0 0 25px rgba(255, 0, 90, 0.5); }
-    to { box-shadow: 0 0 55px rgba(255, 0, 90, 0.9); }
+/* Image */
+.card img {
+    width: 65%;
+    max-width: 220px;
+    height: auto;
+    border-radius: 18px;
+    margin-bottom: 18px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
 }
 
-.big-heart {
-    font-size: 60px;
-    animation: beat 1s infinite;
-}
-
-@keyframes beat {
-    0%,100% { transform: scale(1); }
-    50% { transform: scale(1.2); }
-}
-
-/* Floating Hearts */
-.heart {
-    position: fixed;
-    bottom: -10px;
+/* Title */
+h2 {
+    margin-top: 5px;
+    color: #ff3366;
     font-size: 20px;
-    animation: floatUp 6s linear infinite;
+}
+
+/* Typing Text */
+#typingText {
+    line-height: 1.6;
+    font-size: 14px;
+    margin-top: 12px;
+}
+
+/* Floating Elements */
+.float-item {
+    position: fixed;
+    bottom: -40px;
+    pointer-events: none;
+    animation: floatUp linear infinite;
+    opacity: 0.9;
+    z-index: 1;
 }
 
 @keyframes floatUp {
-    0% { transform: translateY(0); opacity: 1; }
-    100% { transform: translateY(-110vh); opacity: 0; }
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-120vh) rotate(360deg);
+        opacity: 0;
+    }
 }
 
-/* Rose Petals */
-.petal {
+/* Sparkles */
+.sparkle {
     position: fixed;
-    top: -10px;
-    font-size: 18px;
-    animation: fall 7s linear infinite;
+    top: -20px;
+    pointer-events: none;
+    animation: fallDown linear infinite;
+    z-index: 1;
 }
 
-@keyframes fall {
-    0% { transform: translateY(0) rotate(0deg); }
-    100% { transform: translateY(110vh) rotate(360deg); }
+@keyframes fallDown {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(120vh);
+        opacity: 0;
+    }
 }
 
-/* Confetti */
-.confetti {
-    position: fixed;
-    width: 6px;
-    height: 6px;
-    animation: confettiFall 4s linear infinite;
-}
+/* Extra Mobile Optimization */
+@media (max-width: 480px) {
+    .card {
+        padding: 18px;
+        max-width: 340px;
+    }
 
-@keyframes confettiFall {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(110vh); }
-}
+    h2 {
+        font-size: 18px;
+    }
 
-/* Typing text */
-#typing {
-    font-size: 18px;
-    line-height: 1.6;
-    min-height: 120px;
-    color: #333;
-}
+    #typingText {
+        font-size: 13px;
+    }
 
-/* Secret Message */
-#secret {
-    position: fixed;
-    bottom: 10px;
-    background: #fff;
-    padding: 15px 25px;
-    border-radius: 20px;
-    box-shadow: 0 0 20px rgba(255,0,90,0.5);
-    display: none;
-    font-size: 16px;
+    .card img {
+        width: 75%;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<!-- 🎵 Romantic Music -->
+<!-- Background Music -->
 <audio id="bgMusic" loop>
-  <source src="romantic.mp3" type="audio/mp3">
+    <source src="music.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-document.body.addEventListener("click", function () {
-    const music = document.getElementById("bgMusic");
-    music.play().catch(() => {});
+window.addEventListener("load", function () {
+    var music = document.getElementById("bgMusic");
+    music.volume = 0.8;
+
+    function playMusic() {
+        music.play();
+        document.removeEventListener("touchstart", playMusic);
+        document.removeEventListener("click", playMusic);
+    }
+
+    music.play().catch(function () {
+        document.addEventListener("touchstart", playMusic, { once: true });
+        document.addEventListener("click", playMusic, { once: true });
+    });
 });
-</script>
-
-<!-- Floating Hearts -->
-<script>
-for (let i = 0; i < 30; i++) {
-    let heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerHTML = "❤️";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = (4 + Math.random() * 3) + "s";
-    document.body.appendChild(heart);
-}
-</script>
-
-<!-- Rose Petals -->
-<script>
-for (let i = 0; i < 20; i++) {
-    let petal = document.createElement("div");
-    petal.className = "petal";
-    petal.innerHTML = "🌹";
-    petal.style.left = Math.random() * 100 + "vw";
-    petal.style.animationDuration = (5 + Math.random() * 4) + "s";
-    document.body.appendChild(petal);
-}
-</script>
-
-<!-- Confetti -->
-<script>
-for (let i = 0; i < 90; i++) {
-    let conf = document.createElement("div");
-    conf.className = "confetti";
-    conf.style.left = Math.random() * 100 + "vw";
-    conf.style.background = ["#ff4d6d","#ffd166","#06d6a0","#118ab2","#ef476f"][Math.floor(Math.random()*5)];
-    conf.style.animationDuration = (2 + Math.random() * 3) + "s";
-    document.body.appendChild(conf);
-}
 </script>
 
 <div class="card">
-    <div class="big-heart">💖</div>
+
+    <img src="couple2.jpg" alt="Our Love ❤️">
+
+    <div style="font-size:34px;">🤗 🌸 💕</div>
+
     <h2>Yay! She said YES 💞</h2>
 
-    <div id="typing"></div>
+    <div id="typingText"></div>
 
-    <p><b>I love you endlessly, now and always 💘</b></p>
-    <p>Forever Yours,<br>Your Loving Husband 💞</p>
 </div>
 
-<div id="secret">💌 Secret Message: You are the best thing that ever happened to me ❤️</div>
-
+<!-- Typing Effect -->
 <script>
-/* Typing Animation */
-const text = `Congratulations, My Dearest Kiran ❤️
+const message = `Congratulations, My Dearest Kiran ❤️
 
-Today is not just a day… it’s a memory I will cherish forever ✨
-Our first Valentine as husband and wife fills my heart with endless love 💑
+Today is not just a day… it’s a memory I will cherish for a lifetime ✨
+Our first Valentine as husband and wife makes my heart feel so full and grateful 💑
 
 You are my today, my tomorrow, and my forever.
-My home, my happiness, my biggest blessing 💖
+My home, my happiness, my biggest blessing.
 
 Thank you for being my beautiful wife,
-my best friend, my love, my everything 💞
+my best friend, my love, my everything 💖
 
 I promise to love you more with every sunrise,
-to stand by you always,
-and to hold your hand forever 🤝❤️`;
+to stand by you in every moment,
+and to hold your hand forever 🤝❤️
+
+I love you endlessly, now and always 💘🌹
+
+Forever Yours,
+Your Loving Husband 💞`;
 
 let i = 0;
+const speed = 32;
+const typingElement = document.getElementById("typingText");
+
 function typeWriter() {
-    if (i < text.length) {
-        document.getElementById("typing").innerHTML += text.charAt(i);
+    if (i < message.length) {
+        if (message.charAt(i) === "\n") {
+            typingElement.innerHTML += "<br><br>";
+        } else {
+            typingElement.innerHTML += message.charAt(i);
+        }
         i++;
-        setTimeout(typeWriter, 35);
+        setTimeout(typeWriter, speed);
     }
 }
-typeWriter();
 
-/* Secret Message on Tap */
-document.body.addEventListener("click", () => {
-    document.getElementById("secret").style.display = "block";
+window.addEventListener("load", function () {
+    setTimeout(typeWriter, 600);
 });
+</script>
+
+<!-- Celebration Effects -->
+<script>
+/* Floating Hearts + Roses (Optimized Count for Mobile) */
+const symbols = ["💖", "🌹"];
+
+for (let i = 0; i < 18; i++) {
+    let item = document.createElement("div");
+    item.className = "float-item";
+    item.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
+    item.style.left = Math.random() * 100 + "vw";
+    item.style.fontSize = (18 + Math.random() * 14) + "px";
+    item.style.animationDuration = (6 + Math.random() * 4) + "s";
+    document.body.appendChild(item);
+}
+
+/* Sparkles */
+for (let i = 0; i < 20; i++) {
+    let sparkle = document.createElement("div");
+    sparkle.className = "sparkle";
+    sparkle.innerHTML = "✨";
+    sparkle.style.left = Math.random() * 100 + "vw";
+    sparkle.style.fontSize = (12 + Math.random() * 8) + "px";
+    sparkle.style.animationDuration = (4 + Math.random() * 3) + "s";
+    document.body.appendChild(sparkle);
+}
 </script>
 
 </body>
 </html>
-
